@@ -26,6 +26,7 @@
     font-weight: 700;
     color: var(--primary-color);
     margin: 0;
+    cursor: pointer;
 }
 
 .logo p {
@@ -88,10 +89,59 @@
     cursor: pointer;
 }
 
-.nav__icons span img {
+.nav__icons .profile img {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    border-radius: 50%;
+}
+
+.nav__icons .profile {
+    position: relative;
+    z-index: 9;
+
+   
+}
+
+.profile__actions {
+    position: absolute;
+    background: var(--card-bg-01);
+    z-index: 10;
+    top: 100%;
+    width: 400%;
+    transform: translate(-37%);
+    display: flex;
+    align-items: center;
+    line-height: 30px;
+    padding: 15px;
+    cursor: pointer;
+    /* display: none; */
+    border: 1px solid rgb(217, 214, 214);
+    box-shadow: 1px 1px 1px black;
+    justify-content: center;
+
+}
+
+.profile__actions div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile__actions span:hover{
+    color: rgb(74, 74, 213);
+    font-weight: 500;
+}
+
+.profile__actions div span a {
+    text-decoration: none;
+    color: rgb(96, 95, 95);
+}
+
+.profile__actions div span a:hover{
+    color: rgb(74, 74, 213);
+    font-weight: 500;
 }
 
 .mobile__menu {
