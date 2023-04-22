@@ -56,7 +56,6 @@ const Header = () => {
 
     const menuToggle = () => menuRef.current.classList.toggle("active__menu")
 
-    // const profileToggle = () => profileActionsRef.current.classList.toggle("show__profileActions")
     const profileToggle = () => setToggleOptions(!toggleOptions)
 
     useEffect(() => {
@@ -117,6 +116,7 @@ const Header = () => {
                                       currentUser ? <span onClick={logout}>logout</span> : <div>
                                           <span onClick={profileToggle}><Link to={"/signup"}>Signup</Link></span>
                                           <span onClick={profileToggle}><Link to={"/login"}>Login</Link></span>
+                                          <span onClick={profileToggle}><Link to={"/dashboard"}>Dashboard</Link></span>
                                       </div>
                                   }
 
