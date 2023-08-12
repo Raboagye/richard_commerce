@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Helmet from '../Components/Helmet/Helmet'
 import CommonSection from '../Components/UI/CommonSection'
 import { Col, Container, Form, FormGroup, Row } from 'react-bootstrap'
@@ -10,6 +10,10 @@ const Checkout = () => {
 
   const totalQty = useSelector(state => state.cart.totalQuantity)
   const totalAmount = useSelector(state => state.cart.totalAmount)
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  }, [])
 
   return (
     <Helmet title="Checkout">

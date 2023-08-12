@@ -8,6 +8,7 @@ import Shop from "../pages/Shop"
 import Signup from "../pages/Signup"
 import AddProducts from '../admin/AddProducts'
 import AllProducts from '../admin/AllProducts'
+import Addd from '../admin/addd'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
 import {  useSelector } from 'react-redux'
@@ -32,6 +33,7 @@ const Routers = () => {
       <Route path="dashboard/all-products" element={<AllProducts />} />
       <Route path="dashboard/add-products" element={<AddProducts />} />
       <Route path="dashboard/users" element={<Users />} />
+      <Route path="dashboard/addd" element={<Addd />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="shop/:id" element={<ProductDetails />} />

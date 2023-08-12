@@ -2,10 +2,10 @@ import { collection, onSnapshot } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase.config'
 
-
 const useGetData = (collectionName) => {
 
     const [data, setData] = useState([])
+    const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
     const collectionRef = collection(db, collectionName)
 
@@ -32,6 +32,13 @@ const useGetData = (collectionName) => {
           }));
           setData(updatedData);
           setLoading(false);
+
+          const updatedProduct = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            uid: doc.id,
+          }));
+          setProduct(updatedProduct);
+
         });
       
         // Cleanup function to unsubscribe from the snapshot listener
@@ -54,7 +61,7 @@ const useGetData = (collectionName) => {
 
 
 
-  return {data, loading}
+  return {data, product, loading}
 }
 
 export default useGetData

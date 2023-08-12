@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import Helmet from '../Components/Helmet/Helmet'
 import CommonSection from '../Components/UI/CommonSection'
-import products from "../assets/data/products"
+// import products from "../assets/data/products"
 import { useParams } from 'react-router-dom'
 import "../Styles/product__details.css"
 import { motion } from 'framer-motion'
 import ProductList from '../Components/UI/productList'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../Redux/Slices/cartSlice'
 import { toast } from 'react-toastify'
 
@@ -16,17 +16,38 @@ const ProductDetails = () => {
   const reviewUser = useRef("")
   const reviewMsg = useRef("")
   const dispatch = useDispatch()
+  const products = useSelector(state => state.products.products)
 
   const id = useParams().id
 
-  const product = products.find(item => item.id === id)
+  const product = products?.find(item => item.id === id)
 
   const [tab, setTab] = useState("desc")
   const [rating, setRating] = useState(null)
 
-  const {imgUrl, description, productName, reviews, avgRating, price, shortDesc, category} = product
+  let imgUrl = null
+  let description = null
+  let productName = null
+  let reviews = null
+  let avgRating = null
+  let price = null
+  let shortDesc = null
+  let category = null
 
-  const relatedProducts = products.filter((item) => item.category === category)
+  if (products.length) {
+    imgUrl = product.imgUrl
+    description =product.description
+    productName = product.productName
+    reviews = product.reviews
+    avgRating = product.avgRating
+    price = product.price
+    shortDesc=product.shortDesc
+    category = product.category
+  }
+
+  
+
+  const relatedProducts = products?.filter((item) => item.category === category)
 
   const submitHandler = (e) => {
       e.preventDefault()
@@ -49,6 +70,7 @@ const ProductDetails = () => {
 
   useEffect(()=>{
     window.scrollTo(0,0)
+    console.log(product)
   }, [product])
 
   const addToCart = () => {
@@ -86,7 +108,7 @@ const ProductDetails = () => {
                 </div>
                 <div className='d-flex align-items-center gap-5'>
                   <span className='product__price'>${price}</span>
-                  <span>Category: {category.toUpperCase()}</span>
+                  <span>Category: {category?.toUpperCase()}</span>
                 </div>
                 <p className='mt-3 mb-0'>{shortDesc}</p>
                 <motion.button whileTap={{scale: 1.2}} className='buy__button' onClick={addToCart}>Add to Cart</motion.button>
@@ -101,7 +123,7 @@ const ProductDetails = () => {
             <Col lg="12">
               <div className="tab__wrapper d-flex align-items-center gap-5">
                 <h6 className={`${tab === 'desc' ? 'active__tab': ''}`} onClick={()=>setTab("desc")}>Description</h6>
-                <h6 className={`${tab === 'rev' ? 'active__tab': ''}`} onClick={()=>setTab("rev")}>Reviews ({reviews.length})</h6>
+                <h6 className={`${tab === 'rev' ? 'active__tab': ''}`} onClick={()=>setTab("rev")}>Reviews ({reviews?.length})</h6>
               </div>
               {
                 tab === "desc" ? <div className='tab__content mt-5'>

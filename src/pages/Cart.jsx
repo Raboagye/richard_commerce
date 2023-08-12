@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "../Styles/cart.css"
 import Helmet from '../Components/Helmet/Helmet'
 import CommonSection from '../Components/UI/CommonSection'
@@ -13,6 +13,10 @@ const Cart = () => {
 
   const cartItems = useSelector(state => state.cart.cartItems)
   const totalAmount = useSelector(state => state.cart.totalAmount)
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  }, [])
 
   return (
     <Helmet title="Cart">

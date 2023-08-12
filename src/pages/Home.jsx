@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import Helmet from '../Components/Helmet/Helmet'
 import heroImg from "../assets/images/hero-img.png"
 import "../Styles/Home.css"
-import products from "../assets/data/products"
+// import products from "../assets/data/products"
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Services from '../Services/Services'
@@ -11,11 +11,18 @@ import ProductList from '../Components/UI/productList'
 import counterImg from "../assets/images/counter-timer-img.png"
 import Clock from '../Components/UI/Clock'
 import useGetData from '../Custom-Hooks/useGetData'
+import { useDispatch } from 'react-redux'
+import { pushProducts } from '../Redux/Slices/productsSlice'
 
 
 const Home = () => {
 
-  // const {data: products, loading} =useGetData("products")
+  const dispatch = useDispatch()
+
+  const {product: products, loading} =useGetData("products")
+
+  dispatch(pushProducts(products))
+
 
   const [trendingProducts, setTrendingProducts] = useState([])
   const [bestSalesProducts, setBestSalesProducts] = useState([])
@@ -51,8 +58,14 @@ const Home = () => {
     setMobileProducts(filteredMobileProducts)
     setWirelessProducts(filteredWirelessProducts)
     setPopularProducts(filteredPopularProducts)
+  // }, [])
+
+  
+    window.scrollTo(0,0)
+    
+
+  dispatch(pushProducts(products))
   }, [products])
-  // }, [products])
 
  
 
@@ -85,11 +98,11 @@ const Home = () => {
             <Col lg="12" className="text-center " >
               <h2 className="section__title">Trending Products</h2>
             </Col>
-            {/* {
+            {
                 loading? <h5 className='fw-bold'>Loading...</h5> : 
                 <ProductList data={trendingProducts} />
-              } */}
-            <ProductList data={trendingProducts} />
+              }
+            {/* <ProductList data={trendingProducts} /> */}
           </Row>
         </Container>
       </section>
@@ -99,11 +112,11 @@ const Home = () => {
             <Col lg="12" className="text-center " >
               <h2 className="section__title">Best Sales</h2>
             </Col>
-            {/* {
+            {
               loading ? <h5 className='fw-bold'>Loading...</h5> :
                 <ProductList data={bestSalesProducts} />
-            } */}
-            <ProductList data={bestSalesProducts} />
+            }
+            {/* <ProductList data={bestSalesProducts} /> */}
           </Row>
         </Container>
       </section>
@@ -133,15 +146,15 @@ const Home = () => {
             <Col lg="12" className="text-center" >
               <h2 className="section__title">New Arrivals</h2>
             </Col>
-            {/* {
+            {
               loading ? <h5 className='fw-bold'>Loading...</h5> : <>
                 <ProductList data={mobileProducts} />
                 <ProductList data={wirelessProducts} />
               </>
 
-            } */}
-            <ProductList data={mobileProducts}/>
-            <ProductList data={wirelessProducts}/>
+            }
+            {/* <ProductList data={mobileProducts}/>
+            <ProductList data={wirelessProducts}/> */}
           </Row>
         </Container>
       </section>
@@ -151,11 +164,11 @@ const Home = () => {
             <Col lg="12" className="text-center  mb-5" >
               <h2 className="section__title">Popular in Category</h2>
             </Col>
-            {/* {
+            {
               loading ? <h5 className='fw-bold'>Loading...</h5> :
                 <ProductList data={popularProducts} />
-            } */}
-            <ProductList data={popularProducts} />
+            }
+            {/* <ProductList data={popularProducts} /> */}
           </Row>
         </Container>
       </section>

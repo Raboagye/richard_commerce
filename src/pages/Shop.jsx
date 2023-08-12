@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import Helmet from '../Components/Helmet/Helmet'
 import CommonSection from '../Components/UI/CommonSection'
@@ -16,6 +16,12 @@ const Shop = () => {
     const searchedProducts = products.filter((item) => item.productName.toLowerCase().includes(searchedTerm.toLowerCase())) 
     setProductData(searchedProducts)
   }
+
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  }, [])
+
 
   const handleFilter = (e) => {
     const filterValue = e.target.value
